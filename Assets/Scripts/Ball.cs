@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Ball : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    [SerializeField] float ballSpeed = 5f;
+    [SerializeField] float ballStartingSpeed = 5f;
+    float ballCurrentSpeed;
     
     Vector2 direction;
 
@@ -20,7 +23,13 @@ public class Ball : MonoBehaviour
     }
 
     void LaunchBall()
-    {
+    {   
+        //set ball to center of the screen
+        transform.position = Vector2.zero; // same as 0,0
+
+        //reset ball speed to starting speed
+        ballCurrentSpeed = ballStartingSpeed;
+
         float xDirection = Random.Range(-1f, 1f);
         float yDirection = Random.Range(-1f, 1f);
 
@@ -32,7 +41,7 @@ public class Ball : MonoBehaviour
 
         direction.Normalize(); //does not return, but affects the given vector directly
 
-        rb.linearVelocity = direction * ballSpeed;
+        rb.linearVelocity = direction * ballCurrentSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,8 +49,8 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Paddle"))
         {
-            ballSpeed++; //or ballSpeed = ballSpeed +1 or ballSpeed +=1
-            rb.linearVelocity = rb.linearVelocity.normalized * ballSpeed;
+            ballCurrentSpeed++; //or ballSpeed = ballSpeed +1 or ballSpeed +=1
+            rb.linearVelocity = rb.linearVelocity.normalized * ballCurrentSpeed;
         }
     //    if(collision.gameObject.CompareTag("Wall"))
     //    {
@@ -52,6 +61,22 @@ public class Ball : MonoBehaviour
             
     //        rb.linearVelocity = Vector2.Reflect(velocity, normal);
     //    }        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("TRIGGER ACTIVATED");
+
+        //vaihdetaan testiksi sceneä
+        SceneManager.LoadScene("Level 2");
+
+        //RESETOIDAAN PALLON POSITIO KESKELLE
+        //LAUKAISTAAN PALLO ALKUNOPEUDELLA (ei uudella nopeudella)
+        //LaunchBall();              
+
+        //LISÄTÄÄN KO. PELAAJAN PISTEITÄ YHDELLÄ
+
+        
     }
 
 

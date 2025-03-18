@@ -9,7 +9,7 @@ public class Paddle : MonoBehaviour
 
     private void Update()
     {
-        GetPaddleInput();
+        GetPaddleInput();   
     }
 
     void GetPaddleInput()
