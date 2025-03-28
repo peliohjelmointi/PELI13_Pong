@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
     //Luodaan luokasta staattinen instanssi
     public static GameManager Instance;
 
+    public GameObject ballPrefab;
+
     public TextMeshProUGUI scorePlayer1Object;
     public TextMeshProUGUI scorePlayer2Object;
 
@@ -47,7 +49,9 @@ public class GameManager : MonoBehaviour
 
     void SpawnBall()
     {
-
+        GameObject ball = Instantiate(ballPrefab, Vector2.zero, Quaternion.identity);
+        ball.name = "BALL"; //vain esimerkki
+        
     }
 
     public void AddScore(int player)
