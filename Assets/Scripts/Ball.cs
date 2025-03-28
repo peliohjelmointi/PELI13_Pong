@@ -15,7 +15,7 @@ public class Ball : MonoBehaviour
     }
 
     private void Start()
-    {
+    {        
         direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-0.5f, 0.5f)).normalized;
         ballCurrentSpeed = ballStartingSpeed;
         rb.linearVelocity = direction * ballCurrentSpeed;
@@ -39,10 +39,23 @@ public class Ball : MonoBehaviour
         // luodaan GameManageriin AddScore(int player) ja kutsutaan sitä
         if (collision.CompareTag("GoalLeft")) //2.pelaaja scores
             GameManager.Instance.AddScore(2); // pelaajan numero parametrina
-        else if(collision.CompareTag("GoalRight"))
-            GameManager.Instance.AddScore(1);
-    }
-    
 
+        else if (collision.CompareTag("GoalRight"))
+            GameManager.Instance.AddScore(1);
+
+        //asetaan pallo keskelle
+        transform.position = Vector2.zero;
+        
+        //arvotaan uusi suunta
+        direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-0.5f, 0.5f)).normalized;
+        //resetoidaan nopeus takaisin alkunopeudeksi
+        ballCurrentSpeed = ballStartingSpeed;
+        //pallo liikkeelle
+        rb.linearVelocity = direction * ballStartingSpeed;
+    }
 
 }
+
+
+
+
