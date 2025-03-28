@@ -637,6 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff56a8bdaf559e4d8dabd0670376d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 5796526476650572044, guid: 95fc08ae8e8f11a40b3dd4025b6dfa13, type: 3}
   scorePlayer1Object: {fileID: 2144554845}
   scorePlayer2Object: {fileID: 217637416}
   scorePlayer1: 0
